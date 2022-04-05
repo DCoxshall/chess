@@ -2,6 +2,7 @@
 #define _BOARD_H_
 
 #include <string>
+#include <vector>
 
 class Board {
 public:
@@ -20,6 +21,10 @@ private:
 	std::string enPassantTargetSquare;
 	int halfmoveClock;
 	int fullmoveClock;
+	
+	//Stack of FEN strings, mapping out a game's progress.
+	//Should be pushed to before a move is made.
+	std::vector<string> FENstack;
 
 	//Represents FEN string of initial state. See Wikipedia.
 	std::string startPositionFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
