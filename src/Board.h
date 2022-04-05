@@ -13,6 +13,8 @@ public:
 
 	void show(char perspective = 'w');
 	void loadFEN(std::string fenString);
+	
+	void undo();
 private:	
 	//Attributes represent fields of FEN notation.
 	char board[8][8];
