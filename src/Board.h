@@ -14,6 +14,10 @@ public:
 	void show(char perspective = 'w');
 	void loadFEN(std::string fenString);
 	
+	//Stack of FEN strings, mapping out a game's progress.
+	//Should be pushed to before a move is made.
+	std::vector<std::string> FENstack;
+	
 	void undo();
 private:	
 	//Attributes represent fields of FEN notation.
@@ -23,10 +27,7 @@ private:
 	std::string enPassantTargetSquare;
 	int halfmoveClock;
 	int fullmoveClock;
-	
-	//Stack of FEN strings, mapping out a game's progress.
-	//Should be pushed to before a move is made.
-	std::vector<string> FENstack;
+
 
 	//Represents FEN string of initial state. See Wikipedia.
 	std::string startPositionFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
