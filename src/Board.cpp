@@ -31,8 +31,7 @@ void Board::loadFEN(std::string fenString) {
 
     // Load the board state into the board array.
     std::string boardState = fenFields[0];
-    int x = 0;
-    int y = 0;
+    int x = 0, y = 0;
     while (boardState != "") {
         if (isalpha(boardState[0])) {  // The character is a piece
             board[y][x] = boardState[0];
