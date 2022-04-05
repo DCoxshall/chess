@@ -51,9 +51,11 @@ void Board::loadFEN(std::string fenString) {
 }
 
 void Board::undo() {
-    std::string previousFEN = FENstack.back();
-    FENstack.pop_back();
-    loadFEN(previousFEN);
+    if (FENstack.size() > 0) {
+        std::string previousFEN = FENstack.back();
+        FENstack.pop_back();
+        loadFEN(previousFEN);
+    }
 }
 
 // The idea is to present every field of the current FEN as compactly as
