@@ -12,6 +12,52 @@ Board::Board() {
     loadFEN(startPositionFEN);
 }
 
+std::string Board::generateFEN() {
+	std::string newFEN;
+
+	//Handle board state first
+	for (int i = 0; i < 8; i++) {
+		int currentNum = 0;
+		for (int j = 0; j < 8; j++) {
+			if (isalpha(board[i][j])) {
+				if (currentNum > 0) {
+					newFEN.append(std::to_string(currentNum));
+					currentNum = 0;
+				}
+				newFEN += board[i][j];
+			} else {
+				currentNum += 1;			
+			}
+		}
+		if (currentNum > 0) {
+			newFEN.append(std::to_string(currentNum));
+		}
+		newFEN += "/";
+	}
+	newFEN.pop_back();
+	
+	//Hande easy attributes
+	newFEN += " ";
+	newFEN += turn;
+	newFEN += " ";
+
+	if (castling != "") {
+		newFEN += castling;
+		newFEN += " ";
+	}
+
+	newFEN += enPassantTargetSquare;
+	newFEN += " ";
+
+	newFEN += std::to_string(halfmoveClock);
+	newFEN += " ";
+
+	newFEN += std::to_string(fullmoveClock);
+	
+
+	return newFEN;
+}
+
 void Board::loadFEN(std::string fenString) {
     // Split string into fields and place into fenFields;
     std::vector<std::string> fenFields;

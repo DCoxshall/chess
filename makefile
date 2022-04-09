@@ -1,2 +1,2 @@
 main:
-	g++ src/main.cpp src/Board.cpp
+	g++ src/main.cpp src/Board.cpp -o "Chess"

@@ -12,8 +12,10 @@ public:
 	Board();
 
 	void show(char perspective = 'w');
-	void loadFEN(std::string fenString);
 	
+	void loadFEN(std::string fenString);
+	std::string generateFEN();
+
 	//Stack of FEN strings, mapping out a game's progress.
 	//Should be pushed to before a move is made.
 	std::vector<std::string> FENstack;
