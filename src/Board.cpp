@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "Board.hpp"
 
 #include <iostream>
 #include <vector>
@@ -10,6 +10,31 @@ Board::Board(std::string initialBoardState) {
 
 Board::Board() {
 	loadFEN(startPositionFEN);
+}
+
+// void Board::makeMove(std::string move) {
+// 	std::vector<int> integerMove = convertStringToIntMove(move);
+// }
+
+// {6, 4, 4, 4} -> e2e4
+std::string Board::convertIntToStringMove(std::vector<int> move) {
+	std::string alphabet = "abcdefgh";
+	std::string ans = "";
+	char char1 = alphabet[move[1]];
+	char char2 = '8' - move[0];
+	char char3 = alphabet[move[3]];
+	char char4 = '8' - move[2];
+	return ans + char1 + char2 + char3 + char4;
+}
+
+// e2e4 -> {6, 4, 4, 4}
+std::vector<int> Board::convertStringToIntMove(std::string move) {
+	std::string alphabet = "abcdefgh";
+	int field1 = '8' - move[1];
+	int field2 = alphabet.find(move[0]);
+	int field3 = '8' - move[3];
+	int field4 = alphabet.find(move[2]);
+	return {field1, field2, field3, field4};
 }
 
 std::string Board::generateFEN() {
@@ -100,6 +125,8 @@ void Board::undo() {
 		std::string previousFEN = FENstack.back();
 		FENstack.pop_back();
 		loadFEN(previousFEN);
+	} else {
+		std::cout << "Stack is empty, unable to load previous position.";
 	}
 }
 
@@ -127,4 +154,8 @@ void Board::show(char perspective) {
 		}
 	}
 	std::cout << "---End Board---\n";
+}
+
+char Board::getAt(int x, int y) {
+	return board[x][y];
 }
